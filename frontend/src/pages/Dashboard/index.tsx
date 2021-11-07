@@ -1,4 +1,3 @@
-import ImgDsDark from 'assets/img/ds-dark.svg';
 import NavBar from 'components/navbar';
 import Footer from 'components/footer';
 import BarChart from 'components/BarChart';
