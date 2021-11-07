@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
 import { SaleSum } from 'types/sale';
@@ -9,23 +10,26 @@ type ChartData = {
 };
 
 const DonutChart = () => {
-  let chartData: ChartData = { labels: [], series: [] };
-
-  axios.get(`${BASE_URL}/sales/sum-by-seller`).then((response) => {
-    //alert();
-    const data = response.data as SaleSum[];
-    const myLabels = data.map((x) => x.sellerName);
-    const mySeries = data.map((x) => x.sum);
-
-    console.log('myLabels', myLabels);
-    console.log('mySeries', mySeries);
-
-    chartData = {
-      series: mySeries,
-      labels: myLabels,
-    };
+  const [chartData, setChartData] = useState<ChartData>({
+    labels: [],
+    series: [],
   });
-  console.log('charData', chartData);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/sales/sum-by-seller`).then((response) => {
+      //alert();
+      const data = response.data as SaleSum[];
+      const myLabels = data.map((x) => x.sellerName);
+      const mySeries = data.map((x) => x.sum);
+
+      setChartData({
+        series: mySeries,
+        labels: myLabels,
+      });
+    });
+  }, []);
+
+  // console.log('charData', chartData);
   /* const mockData = {
     series: [477138, 499928, 444867, 220426, 473088],
     labels: ['Anakin', 'Barry Allen', 'Kal-El', 'Logan', 'Padmé'],
