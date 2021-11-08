@@ -19,9 +19,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="py-3 ">
-        <h2 className="text-primary">
-          Todas as vendas e mais ainda do manolitcho
-        </h2>
+        <h2 className="text-primary">Todas as vendas</h2>
       </div>
       <div className="container">
         <DataTable></DataTable>
